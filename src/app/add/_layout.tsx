@@ -5,6 +5,12 @@ export default function Layout() {
         <Stack 
             screenOptions={{
                 headerTitle: "Nova Moeda",
+                headerStyle: {
+                    backgroundColor: "#172554",
+                },
+                headerTitleStyle: {
+                    color: "#f8fafc"
+                }
             }}
         >
             <Stack.Screen name="index"/>
