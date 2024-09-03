@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, FlatList, Keyboard, Text, View } from "react-native";
+import { Alert, FlatList, Keyboard, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { Loading } from "@/components/loading";
@@ -8,6 +8,8 @@ import { Button } from "@/components/button";
 import { CoinCard } from "@/components/coin-card";
 
 import { Coin, getCoinsMarketData } from "@/services/get-market";
+
+import { useCoinStore } from "@/stores/coin-store";
 
 export default function Add() {
     const [coinsMarket, setCoinsMarket] = useState<Coin[]>([])
@@ -37,6 +39,18 @@ export default function Add() {
         }
     }, [search])
 
+    function handleCoinCardPress(coin: Coin) {
+        const { coins, add } = useCoinStore()
+
+        const existingCoin = coins.find(item => item === coin)
+
+        if (existingCoin) {
+            return Alert.alert("Atenção!", "Esta moeda já está adicionada!")
+        }
+
+        return add(coin)
+    }
+
     async function getCoinsMarket() {
         try {
             const coins = await getCoinsMarketData()
@@ -58,7 +72,11 @@ export default function Add() {
     return (
         <View className="flex-1 p-3">
             <View className="flex-row mb-3">
-                <Input value={search} onChangeText={setSearch} />
+                <Input value={search} onChangeText={setSearch} onKeyPress={(event) => {
+                    if (event.nativeEvent.key === 'Enter') {
+                        handleSearchButton()
+                    }
+                }} />
                 <Button className="ml-3" onPress={handleSearchButton}>
                     <MaterialIcons name="search" color="#FFFFFF" size={26} />
                 </Button>
@@ -68,7 +86,7 @@ export default function Add() {
                 data={coinsMarket}
                 keyExtractor={item  => item.id} 
                 renderItem={
-                    ({item}) => (<CoinCard coin={item} />)
+                    ({item}) => (<CoinCard coin={item} onPress={() => handleCoinCardPress(item)}/>)
                 } 
             />
         </View>
