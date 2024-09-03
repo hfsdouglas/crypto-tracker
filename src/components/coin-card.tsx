@@ -8,7 +8,7 @@ type CoinCardProps = PressableProps & {
 export function CoinCard({ coin, ...rest }: CoinCardProps) {
     return (
         <Pressable 
-            className="bg-slate-50 flex-row h-32 border-b p-6 mb-3"
+            className="bg-white flex-row h-32 border-b p-6 mb-3"
             {...rest}
         >
             <Image src={coin.image} alt="Coin Thumbnail" className="h-20 w-20 mr-6"/>

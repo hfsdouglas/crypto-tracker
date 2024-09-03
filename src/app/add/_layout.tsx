@@ -1,5 +1,5 @@
 import { router, Stack } from "expo-router";
-import { Platform, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Layout() {

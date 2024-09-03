@@ -4,7 +4,7 @@ import "../styles/global.css"
 
 export default function Layout() {
     return (
-        <View className="flex-1">
+        <View className="flex-1 bg-slate-200">
             <StatusBar barStyle="light-content" />
             <Slot />
         </View>

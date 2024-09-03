@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alert, FlatList, Keyboard, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 import { Loading } from "@/components/loading";
 import { Input } from "@/components/input";
@@ -39,14 +40,16 @@ export default function Add() {
         }
     }, [search])
 
-    function handleCoinCardPress(coin: Coin) {
-        const { coins, add } = useCoinStore()
+    const { coins, add } = useCoinStore()
 
-        const existingCoin = coins.find(item => item === coin)
+    function handleCoinCardPress(coin: Coin) {
+        const existingCoin = coins.filter(item => item.id === coin.id)
 
         if (existingCoin) {
             return Alert.alert("Atenção!", "Esta moeda já está adicionada!")
         }
+
+        router.back()
 
         return add(coin)
     }
