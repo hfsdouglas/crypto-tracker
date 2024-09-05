@@ -5,7 +5,8 @@ export type Coin = {
     symbol: string,
     name: string,
     image: string,
-    current_price: number
+    current_price: number,
+    price_change_percentage_24h: number,
 }
 
 async function getCoinsMarket() {
