@@ -45,7 +45,7 @@ export default function Add() {
     function handleCoinCardPress(coin: Coin) {
         const existingCoin = coins.filter(item => item.id === coin.id)
 
-        if (existingCoin) {
+        if (existingCoin.length > 0) {
             return Alert.alert("Atenção!", "Esta moeda já está adicionada!")
         }
 
