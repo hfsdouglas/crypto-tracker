@@ -14,6 +14,9 @@ async function getCoinsMarket() {
     return response
 }
 
+/**
+ * @returns an array of coins
+ */
 async function getCoinsMarketData() {
     const { data } = await getCoinsMarket()
     const fields = ['id', 'name', 'symbol', 'image', 'current_price', 'price_change_percentage_24h']
